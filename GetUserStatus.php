@@ -6,10 +6,10 @@ require "functions.php";
 // TwitterOAuthクラスをインポート
 use Abraham\TwitterOAuth\TwitterOAuth;
 //ここは.envで隠す必要あり
-$CK = 'YN8eKeywLslpv4rqUBt6A8VMQ'; 
-$CS = 'E10SLyzTnrtzSwKX7OWEAFAPoBOyKg8XML3wBRGYzsyJna1iVZ'; 
-$AT = '376883364-FvyhZmxDlt3KR4wqIm1Txntbx3fh9eUqYLG0DgI1'; 
-$AS = 'AzKgkodWCDCvlMN91JTpvz3ePgl9oZi3gilOwzIN3KBOf';
+$CK = 'xxxxxxxxxxxxxxx'; 
+$CS = 'xxxxxxxxxxxxxxx'; 
+$AT = 'xxxxxxxxxxxxxxx'; 
+$AS = 'xxxxxxxxxxxxxxx';
 
 $target = $_POST;
 if($target['name_1']!="++rank_generate"){
