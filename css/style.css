@@ -1,0 +1,19 @@
+table{
+    border-bottom: 5px solid rgba(107, 250, 24, 0.4);
+    }
+    table th {
+    border-bottom: 5px solid rgba(107, 250, 24, 0.4);
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    text-align:center;
+    width: 80px;
+    }
+    table td {
+    border-bottom: 2px dotted rgb(251, 255, 40);
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    text-align:center;
+    width: 150px;
+    }

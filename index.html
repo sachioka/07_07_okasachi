@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>twitter API & DB</title>
+</head>
+<body>
+  <h1>フォローワー数ランキング</h1>
+  <!-- action を空にすることでここに戻る -->
+  <form id="UserAdd" action="" method="POST">
+      <div>
+        <div><input id="id_1" type="text" name="name_1">
+         <button id="submit">ユーザ追加</button> </div>
+      <a href="ShowAllUsers.php">登録ユーザ一覧</a>
+  </form>
+  <br>
+  <br>
+  <br>
+  <form id="RankGen" action="" method="POST">
+        <div> <button id="submit" >ランキング表示</button> </div>
+  </form>
+
+  
+  <canvas id="myChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+    $(function($){
+        $( '#UserAdd' ).submit( function(event){
+            //submitのデフォルト動作（フォーム送信）されてしまうのを防ぐ
+            event.preventDefault();
+            //FormData submitするオブジェクト作成
+            var fd = new FormData( this );
+            $.ajax({
+                type: 'POST',
+                url: "GetUserStatus.php",
+                data: fd,
+                // processData: false,
+                // contentType: false,
+                success: function( response ){
+                    $("#resultarea").html(response);
+                },
+                error: function( response ){
+                    $("#resultarea").html( "error" );
+                }
+            });
+
+            return false;
+        });
+        $( '#RankGen' ).submit( function(event){
+            event.preventDefault();
+            var fd = new FormData( this );
+            fd.append('name_1','++rank_generate');
+            // 'name_1' インデックス、'++rank_generate'中身
+            $.ajax({
+                type: 'POST',
+                url: "GetUserStatus.php",
+                data: fd,
+                processData: false,
+                //queryには変換しないで欲しい
+                contentType: false,
+                //contentTypeに対する指定
+                success: function( response ){
+                    var jdata = JSON.parse(response);
+                    $("#resultarea").html(response);
+                    //グラフパラメータの準備（棒グラフ）
+                    var params = {
+                        type: 'bar',
+                        data: {
+                            datasets: jdata
+                        }
+
+                    };
+                    //グラフの作成
+                    var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, params);
+                    //オブジェクト思考で考える
+                    //ジャワカレーと星の王子様カレー、インスタンスでルーを選んで作成！
+                },
+                error: function( response ){
+                    $("#resultarea").html( "error" );
+                }
+            });
+            return false;
+        });
+    });
+  </script>
+</body>
+</html>
